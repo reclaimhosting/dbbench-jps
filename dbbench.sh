@@ -3,7 +3,6 @@
 HOST="localhost"
 USER="##DB_USER##"
 PASSWORD="##DB_PASSWORD##"
-DATABASE="dbbench"
 ITERATIONS=3
 CONCURRENCY="10,50,100"
 QUERIES=1000
@@ -80,7 +79,7 @@ echo
 
 mysqlslap --host="$HOST" --user="$USER" --password=$PASSWORD --concurrency="$CONCURRENCY" \
     --iterations="$ITERATIONS" --number-of-queries="$QUERIES" \
-    --create-schema="$DATABASE" \
+    --create-schema="mysqlslap" \
     --query="SELECT * FROM information_schema.tables LIMIT 10" \
     --delimiter=";" \
     --verbose
