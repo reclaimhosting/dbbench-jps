@@ -9,7 +9,7 @@ skipNodeEmails: true
 nodes:
   nodeType: mysql
   nodeGroup: sqldb
-  cloudlets: 16
+  cloudlets: 32
   fixedcloudlets: 1
   extip: false
 
@@ -27,7 +27,7 @@ actions:
       MYSQL_PWD=${nodes.sqldb.password} mysql -uroot -e "CREATE DATABASE dbbench;"
       MYSQL_PWD=${nodes.sqldb.password} mysql -uroot -e "CREATE USER '${globals.DB_USER}'@'%' IDENTIFIED BY '${globals.DB_PASS}';"
       MYSQL_PWD=${nodes.sqldb.password} mysql -uroot -e "GRANT ALL PRIVILEGES ON dbbench.* TO '${globals.DB_USER}'@'%' WITH GRANT OPTION;"
-      curl https://raw.githubusercontent.com/reclaimhosting/dbbench-jps/main/${baseUrl}/dbbench.sh -o /home/jelastic/dbbench.sh
+      curl ${baseUrl}/dbbench.sh -o /home/jelastic/dbbench.sh
       chmod +x /home/jelastic/dbbench.sh
       sed -i "s/##DB_USER##/${globals.DB_USER}/g" /home/jelastic/dbbench.sh
       sed -i "s/##DB_PASS##/${globals.DB_PASS}/g" /home/jelastic/dbbench.sh
