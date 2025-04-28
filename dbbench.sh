@@ -65,13 +65,6 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Password handling
-if [ -n "$PASSWORD" ]; then
-    PASS_ARG="--password=$PASSWORD"
-else
-    PASS_ARG=""
-fi
-
 echo "=== Benchmark ==="
 echo "Host: $HOST"
 echo "User: $USER"
@@ -85,7 +78,7 @@ echo "========================"
 echo "Running benchmark..."
 echo
 
-mysqlslap --host="$HOST" --user="$USER" $PASS_ARG --concurrency="$CONCURRENCY" \
+mysqlslap --host="$HOST" --user="$USER" $PASSWORD --concurrency="$CONCURRENCY" \
     --iterations="$ITERATIONS" --number-of-queries="$QUERIES" \
     --create-schema="$DATABASE" \
     --query="SELECT * FROM information_schema.tables LIMIT 10" \
@@ -97,7 +90,7 @@ echo
 echo "Running auto-generated tests..."
 echo
 
-mysqlslap --host="$HOST" --user="$USER" $PASS_ARG --concurrency="$CONCURRENCY" \
+mysqlslap --host="$HOST" --user="$USER" $PASSWORD --concurrency="$CONCURRENCY" \
     --iterations="$ITERATIONS" --number-of-queries="$QUERIES" \
     --auto-generate-sql \
     --auto-generate-sql-load-type=mixed \

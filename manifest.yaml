@@ -30,4 +30,4 @@ actions:
       curl ${baseUrl}/dbbench.sh -o /home/jelastic/dbbench.sh
       chmod +x /home/jelastic/dbbench.sh
       sed -i "s/##DB_USER##/${globals.DB_USER}/g" /home/jelastic/dbbench.sh
-      sed -i "s/##DB_PASS##/${globals.DB_PASS}/g" /home/jelastic/dbbench.sh
+      sed -i "s/##DB_PASSWORD##/${globals.DB_PASS}/g" /home/jelastic/dbbench.sh
