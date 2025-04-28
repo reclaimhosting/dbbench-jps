@@ -78,7 +78,7 @@ echo "========================"
 echo "Running 'SELECT * FROM information_schema.tables LIMIT 10' queries..."
 echo
 
-mysqlslap --host="$HOST" --user="$USER" $PASSWORD --concurrency="$CONCURRENCY" \
+mysqlslap --host="$HOST" --user="$USER" --password=$PASSWORD --concurrency="$CONCURRENCY" \
     --iterations="$ITERATIONS" --number-of-queries="$QUERIES" \
     --create-schema="$DATABASE" \
     --query="SELECT * FROM information_schema.tables LIMIT 10" \
@@ -90,7 +90,7 @@ echo
 echo "Running auto-generated mysqlslap tests..."
 echo
 
-mysqlslap --host="$HOST" --user="$USER" $PASSWORD --concurrency="$CONCURRENCY" \
+mysqlslap --host="$HOST" --user="$USER" --password=$PASSWORD --concurrency="$CONCURRENCY" \
     --iterations="$ITERATIONS" --number-of-queries="$QUERIES" \
     --auto-generate-sql \
     --auto-generate-sql-load-type=mixed \
