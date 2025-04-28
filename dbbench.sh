@@ -82,6 +82,7 @@ mysqlslap --host="$HOST" --user="$USER" --password=$PASSWORD --concurrency="$CON
     --create-schema="mysqlslap" \
     --query="SELECT * FROM information_schema.tables LIMIT 10" \
     --delimiter=";" \
+    --no-drop \
     --verbose
 
 # Run auto-generated tests (creates temp tables)
@@ -94,8 +95,10 @@ mysqlslap --host="$HOST" --user="$USER" --password=$PASSWORD --concurrency="$CON
     --auto-generate-sql \
     --auto-generate-sql-load-type=mixed \
     --auto-generate-sql-add-autoincrement \
+    --no-drop \
     --engine=innodb \
     --verbose
+    
 
 echo
 echo "Benchmark completed."
