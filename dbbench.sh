@@ -75,7 +75,7 @@ echo "Queries per client: $QUERIES"
 echo "========================"
 
 # Run the benchmark
-echo "Running benchmark..."
+echo "Running 'SELECT * FROM information_schema.tables LIMIT 10' queries..."
 echo
 
 mysqlslap --host="$HOST" --user="$USER" $PASSWORD --concurrency="$CONCURRENCY" \
@@ -87,7 +87,7 @@ mysqlslap --host="$HOST" --user="$USER" $PASSWORD --concurrency="$CONCURRENCY" \
 
 # Run auto-generated tests (creates temp tables)
 echo
-echo "Running auto-generated tests..."
+echo "Running auto-generated mysqlslap tests..."
 echo
 
 mysqlslap --host="$HOST" --user="$USER" $PASSWORD --concurrency="$CONCURRENCY" \
