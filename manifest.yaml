@@ -23,4 +23,4 @@ actions:
       curl ${baseUrl}/dbbench.sh -o /home/jelastic/dbbench.sh
       chmod +x /home/jelastic/dbbench.sh
       sed -i "s/##DB_USER##/root/g" /home/jelastic/dbbench.sh
-      sed -i "s/##DB_PASSWORD##/${nodes.sqldb.paassword}/g" /home/jelastic/dbbench.sh
+      sed -i "s/##DB_PASSWORD##/${nodes.sqldb.password}/g" /home/jelastic/dbbench.sh
