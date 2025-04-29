@@ -20,6 +20,7 @@ actions:
   
   setup:
     cmd[sqldb]: |-
+      dnf update
       dnf install sysbench -y
       curl ${baseUrl}/dbbench.sh -o /home/jelastic/dbbench.sh
       chmod +x /home/jelastic/dbbench.sh
