@@ -1,0 +1,23 @@
+type: install
+jpsVersion: 8.3.1
+id: docker-dbbench
+name: Docker DB Benchmarking
+baseUrl: https://raw.githubusercontent.com/reclaimhosting/dbbench-jps/main
+  
+skipNodeEmails: true
+
+nodes:
+  nodeType: dockerengine
+  nodeGroup: cp
+  cloudlets: 32
+  fixedcloudlets: 1
+  extip: false
+
+onInstall:
+  - setup
+
+actions:
+  
+  setup:
+    cmd[cp]: |-
+      curl ${baseUrl}/docker-compose.yml -o /root/docker-compose.yml
