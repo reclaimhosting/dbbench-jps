@@ -20,8 +20,8 @@ actions:
   
   setup:
     cmd[sqldb]: |-
-      dnf update
-      dnf install sysbench -y
+      yum update
+      yum install sysbench -y
       curl ${baseUrl}/dbbench.sh -o /home/jelastic/dbbench.sh
       chmod +x /home/jelastic/dbbench.sh
       MYSQL_PWD=${nodes.sqldb.password} mysql -uroot -e "CREATE DATABASE test_db;"
