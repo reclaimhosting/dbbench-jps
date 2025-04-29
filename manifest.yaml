@@ -13,10 +13,6 @@ nodes:
   fixedcloudlets: 1
   extip: false
 
-globals:
-  DB_USER: user-${fn.random}
-  DB_PASS: ${fn.password(10)}
-
 onInstall:
   - setup
 
@@ -24,10 +20,7 @@ actions:
   
   setup:
     cmd[sqldb]: |-
-      MYSQL_PWD=${nodes.sqldb.password} mysql -uroot -e "CREATE DATABASE mysqlslap;"
-      MYSQL_PWD=${nodes.sqldb.password} mysql -uroot -e "CREATE USER '${globals.DB_USER}'@'%' IDENTIFIED BY '${globals.DB_PASS}';"
-      MYSQL_PWD=${nodes.sqldb.password} mysql -uroot -e "GRANT ALL PRIVILEGES ON mysqlslap.* TO '${globals.DB_USER}'@'%' WITH GRANT OPTION;"
       curl ${baseUrl}/dbbench.sh -o /home/jelastic/dbbench.sh
       chmod +x /home/jelastic/dbbench.sh
-      sed -i "s/##DB_USER##/${globals.DB_USER}/g" /home/jelastic/dbbench.sh
-      sed -i "s/##DB_PASSWORD##/${globals.DB_PASS}/g" /home/jelastic/dbbench.sh
+      sed -i "s/##DB_USER##/root/g" /home/jelastic/dbbench.sh
+      sed -i "s/##DB_PASSWORD##/${nodes.sqldb.paassword}/g" /home/jelastic/dbbench.sh
