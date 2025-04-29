@@ -9,13 +9,14 @@ services:
     ports:
       - "3306:3306"
     command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - db:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "testuser", "-ptestpass"]
       interval: 5s
       timeout: 5s
-      retries: 10
+      retries: 50
 
-  # Sysbench container for performance testing
   sysbench:
     image: severalnines/sysbench
     depends_on:
@@ -30,3 +31,6 @@ services:
         echo 'Cleaning up test data...' &&
         sysbench oltp_read_write --tables=10 --table-size=100000 --mysql-db=test_db --mysql-user=testuser --mysql-password=testpass --mysql-host=mysql cleanup
       "
+
+volumes:
+  db:
