@@ -67,20 +67,19 @@ done
 echo "=== Benchmark ==="
 echo "Host: $HOST"
 echo "User: $USER"
-echo "Database: $DATABASE"
 echo "Iterations: $ITERATIONS"
 echo "Concurrency levels: $CONCURRENCY"
 echo "Queries per client: $QUERIES"
 echo "========================"
 
 # Run the benchmark
-echo "Running 'SELECT * FROM information_schema.tables LIMIT 10' queries..."
+echo "Running 'SELECT * FROM information_schema.tables' queries..."
 echo
 
 mysqlslap --host="$HOST" --user="$USER" --password=$PASSWORD --concurrency="$CONCURRENCY" \
     --iterations="$ITERATIONS" --number-of-queries="$QUERIES" \
     --create-schema="mysqlslap" \
-    --query="SELECT * FROM information_schema.tables LIMIT 10" \
+    --query="SELECT * FROM information_schema.tables" \
     --delimiter=";" \
     --verbose
 
