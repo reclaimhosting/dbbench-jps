@@ -72,6 +72,11 @@ echo "Concurrency levels: $CONCURRENCY"
 echo "Queries per client: $QUERIES"
 echo "========================"
 
+echo
+echo "Creating test mysqlslap database..."
+echo
+MYSQL_PWD=$PASSWORD mysql -uroot -e "CREATE DATABASE mysqlslap;"
+
 # Run the benchmark
 echo "Running 'SELECT * FROM information_schema.tables' queries..."
 echo
