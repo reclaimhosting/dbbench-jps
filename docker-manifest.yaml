@@ -32,4 +32,4 @@ actions:
   download-script:
     cmd[cp]: |-
       curl ${baseUrl}/dbbench.sh -o /root/dbbench.sh
-      chmod +x /home/jelastic/dbbench.sh
+      chmod +x /root/dbbench.sh
