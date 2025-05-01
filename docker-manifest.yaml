@@ -15,9 +15,20 @@ nodes:
 
 onInstall:
   - setup
+  - install-sysbench
+  - download-script
 
 actions:
   
   setup:
     cmd[cp]: |-
       curl ${baseUrl}/docker-compose.yml -o /root/docker-compose.yml
+ 
+  install-sysbench:
+    cmd[cp]: |-
+      sudo yum install sysbench -y
+  
+  download-script:
+    cmd[cp]: |-
+      curl ${baseUrl}/dbbench.sh -o /root/dbbench.sh
+      chmod +x /home/jelastic/dbbench.sh
