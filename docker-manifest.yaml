@@ -23,6 +23,7 @@ actions:
   setup:
     cmd[cp]: |-
       curl ${baseUrl}/docker-compose.yml -o /root/docker-compose.yml
+      docker-compose up -d
  
   install-sysbench:
     cmd[cp]: |-
