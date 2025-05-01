@@ -8,30 +8,5 @@ services:
       MYSQL_PASSWORD: testpass
     ports:
       - "3306:3306"
-    command: --authentication-policy=mysql_native_password
     volumes:
-      - db:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "testuser", "-ptestpass"]
-      interval: 5s
-      timeout: 5s
-      retries: 50
-
-  sysbench:
-    image: severalnines/sysbench
-    depends_on:
-      mysql:
-        condition: service_healthy
-    command: >
-      bash -c "
-        sleep 10 &&
-        echo 'Preparing test data...' &&
-        sysbench oltp_read_write --tables=10 --table-size=100000 --mysql-db=test_db --mysql-user=testuser --mysql-password=testpass --mysql-host=mysql prepare &&
-        echo 'Running benchmark...' &&
-        sysbench oltp_read_write --tables=10 --table-size=100000 --mysql-db=test_db --mysql-user=testuser --mysql-password=testpass --mysql-host=mysql --time=60 --threads=4 --report-interval=10 run &&
-        echo 'Cleaning up test data...' &&
-        sysbench oltp_read_write --tables=10 --table-size=100000 --mysql-db=test_db --mysql-user=testuser --mysql-password=testpass --mysql-host=mysql cleanup
-      "
-
-volumes:
-  db:
+      - ./db:/var/lib/mysql
