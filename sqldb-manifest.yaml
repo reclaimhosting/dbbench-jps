@@ -8,7 +8,7 @@ skipNodeEmails: true
 
 nodes:
   nodeType: mysql
-  tag: 8.4.5-almalinux-9
+  tag: 8.0.42-almalinux-9
   nodeGroup: cp
   cloudlets: 32
   fixedcloudlets: 1
