@@ -14,16 +14,33 @@ nodes:
   extip: false
 
 onInstall:
-  - setup
+  - sudo
+  - install-sysbench
+  - download-script
+  - setup-db
 
 actions:
-  
-  setup:
+
+  sudo: 
+    - cmd[cp]: |-
+        TARGET_UID=$(id -u jelastic 2>/dev/null) || TARGET_UID="700"
+        getent passwd "${TARGET_UID}" &>/dev/null && TARGET_USER=$(getent passwd "${TARGET_UID}" | cut -d: -f1)  || TARGET_USER="jelastic"
+        sed -i "\$a${TARGET_USER}\ ALL=NOPASSWD\:\ ALL" /etc/sudoers; echo ${TARGET_USER}
+      user: root
+    - setGlobals:
+        sudo_user: ${response.out}
+
+  install-sysbench:
     cmd[cp]: |-
-      yum update
-      yum install sysbench -y
+      sudo yum install sysbench -y
+  
+  download-script:
+    cmd[cp]: |-
       curl ${baseUrl}/dbbench.sh -o /home/jelastic/dbbench.sh
       chmod +x /home/jelastic/dbbench.sh
+      
+  setup-db:
+    cmd[cp]: |-
       MYSQL_PWD=${nodes.cp.password} mysql -uroot -e "CREATE DATABASE test_db;"
       MYSQL_PWD=${nodes.cp.password} mysql -uroot -e "CREATE USER 'testuser'@'%' IDENTIFIED BY 'testpass';"
       MYSQL_PWD=${nodes.cp.password} mysql -uroot -e "GRANT ALL PRIVILEGES ON test_db.* TO 'testuser'@'%' WITH GRANT OPTION;"
