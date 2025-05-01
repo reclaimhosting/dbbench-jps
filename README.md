@@ -10,3 +10,4 @@ Use JPS in [`docker-manifest.yaml`](docker-manifest.yaml) or [`sqldb-manifest.ya
 
 ## Run a test
 - Open a terminal in the container and run `./dbbench.sh` to start the tests.
+- Or run it and log it too: `./dbbench.sh | tee $(date --iso-8601).log`
